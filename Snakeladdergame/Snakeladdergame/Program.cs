@@ -19,26 +19,49 @@
 
 //    }
 
+
+
 namespace SnakeLadderGame
 {
     public class SnakeGame
     {
-        const int position = 0;
+        const int NO_PLAY = 0, SNAKE = 1, LADDER = 2;
+        int position = 0;
         public int dieRoll()
         {
             Random random = new Random();
-            int roll = random.Next(1, 7);
-            return roll;
+            int diePosition = random.Next(1, 7);
+            return diePosition;
+        }
+        public void gamePlaying()
+        {
+            Random random = new Random();
+            int roll = random.Next(0, 3);
+
+            switch (roll)
+            {
+                case NO_PLAY:
+                    this.position += 0;
+                    break;
+                case SNAKE:
+                    this.position -= this.dieRoll();
+                    break;
+                case LADDER:
+                    this.position += this.dieRoll();
+                    break;
+            }
+
         }
 
     }
-    public class program
-    {
-        public static void Main(String[] args)
-        {
-            SnakeGame game = new SnakeGame();
-            int start = game.dieRoll();
-            Console.WriteLine("Welcome in the Game, You got : " + start + "  " + "Position");
-        }
+}
+public class program
+{
+    public static void Main(String[] args)
+    { 
+    SnakeGame game = new SnakeGame();
+       int start= game.dieRoll();
+        Console.WriteLine("Welcome in the Game, You got : "+ start+ "  " +"Position" );
     }
 }
+
